@@ -1,0 +1,39 @@
+pip install psycopg2
+import psycopg2
+
+# Parámetros de conexión
+dbname = "plataformas"
+user = "user1"
+password = "123456"
+host = "localhost"  
+port = "5432"  
+
+# Intentar establecer la conexión
+try:
+    # Crear una conexión
+    connection = psycopg2.connect(
+        dbname=dbname, user=user, password=pasword, host=host, port=port
+    )
+
+    # Crear un cursor
+    cursor = connection.cursor()
+
+    # Ejecutar consultas aquí
+
+    # Ejemplo de consulta SELECT
+    cursor.execute("SELECT * FROM tu_tabla;")
+    rows = cursor.fetchall()
+    for row in rows:
+        print(row)
+
+    # Cerrar el cursor y aplicar los cambios (si es necesario)
+    cursor.close()
+    connection.commit()
+
+except Exception as e:
+    print("Error de conexión:", e)
+
+finally:
+    # Cerrar la conexión fuera del bloque 'try' para asegurarse de que siempre se cierre
+    if connection:
+        connection.close()
