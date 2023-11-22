@@ -10,8 +10,8 @@ create table cancion
 	codigo_cancion integer,
 	nombre_cancion varchar (50),
 	anio int,
-  mes int,
-  dia int,
+  	mes int,
+  	dia int,
 	numero_artistas integer,
 	primary key (codigo_cancion)
 );
