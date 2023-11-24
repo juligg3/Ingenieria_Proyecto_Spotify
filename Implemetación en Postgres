@@ -1,14 +1,14 @@
 Create table Artista
 (
 	codigo_artista integer,
-	nombre varchar (30),
+	nombre varchar (80),
 	primary key (codigo_artista)
 );
 
 create table cancion
 (
 	codigo_cancion integer,
-	nombre_cancion varchar (50),
+	nombre_cancion varchar (180),
 	anio int,
   	mes int,
   	dia int,
