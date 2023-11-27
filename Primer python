@@ -40,7 +40,7 @@ fig1 = px.bar(df_top_artistas, x='Artista', y='Repeticiones', title='Top 5 Artis
 
 
 # Grafico que obtiene las 10 canciones mas escuchadas
-def obtener_top_10_canciones():
+def obtener_top_3_canciones():
     conn = psycopg2.connect(
         dbname="final",
         user="postgres",
@@ -53,7 +53,7 @@ def obtener_top_10_canciones():
     select nombre_cancion, stream  
     from cancion, info_plataformas where codigo_cancion=cod_cancion 
     order by stream desc
-    limit 10
+    limit 3
     """
     cur.execute(query)
     data = cur.fetchall()
@@ -65,11 +65,565 @@ def obtener_top_10_canciones():
     df = pd.DataFrame(data, columns=['Canción', 'Streams'])
     return df
 
-df_top_canciones = obtener_top_10_canciones()
+df_top_canciones = obtener_top_3_canciones()
 
 # Crear la figura con Plotly Express
-fig2 = px.bar(df_top_canciones, x='Canción', y='Streams', title='Top 10 Canciones Más Escuchadas')
+fig2 = px.bar(df_top_canciones, x='Canción', y='Streams', title='Top 3 Canciones Más Escuchadas')
 
+# Número de playlist en cada plataforma por canción 56
+def playlist56(query, parametros_conexion):
+    conn = psycopg2.connect(**parametros_conexion)
+    cur = conn.cursor()
+    cur.execute(query)
+    data = cur.fetchall()
+    cur.close()
+    conn.close()
+    return pd.DataFrame(data, columns=['Nombre Plataforma', 'Número de Playlist'])
+
+# Parámetros de conexión a la base de datos
+parametros_conexion = {
+    "dbname": "final",
+    "user": "postgres",
+    "password": "123456789",
+    "host": "localhost"
+}
+
+# Consulta SQL para el primer gráfico
+consulta_1 = """
+SELECT p.nombre AS nombre_plataforma, ip.playlist AS numero_de_playlists
+FROM info_plataformas ip
+INNER JOIN plataformas p ON ip.cod_plataforma = p.codigo_plataforma
+WHERE ip.cod_cancion = 56
+"""
+
+# Ejecutar la consulta y obtener DataFrame
+df2_1 = playlist56(consulta_1, parametros_conexion)
+
+# Crear gráficos con Plotly Express
+fig3 = px.bar(df2_1, x='Nombre Plataforma', y='Número de Playlist', title='Playlist por plataforma')
+
+#Número de charts por plataforma para la canción 56
+def charts56(query, parametros_conexion):
+    conn = psycopg2.connect(**parametros_conexion)
+    cur = conn.cursor()
+    cur.execute(query)
+    data = cur.fetchall()
+    cur.close()
+    conn.close()
+    return pd.DataFrame(data, columns=['Nombre Plataforma', 'Número de Charts'])
+
+# Parámetros de conexión a la base de datos
+parametros_conexion = {
+    "dbname": "final",
+    "user": "postgres",
+    "password": "123456789",
+    "host": "localhost"
+}
+
+# Consulta SQL para el primer gráfico
+consulta_1 = """
+SELECT p.nombre AS nombre_plataforma, ip.charts AS numero_de_charts
+FROM info_plataformas ip
+INNER JOIN plataformas p ON ip.cod_plataforma = p.codigo_plataforma
+WHERE ip.cod_cancion = 56
+"""
+
+# Ejecutar la consulta y obtener DataFrame
+df2_2 = charts56(consulta_1, parametros_conexion)
+
+# Crear gráficos con Plotly Express
+fig4 = px.bar(df2_2, x='Nombre Plataforma', y='Número de Charts', title='Playlist por plataforma')
+
+#Número de playlist para la canción 87
+def playlist87(query, parametros_conexion):
+    conn = psycopg2.connect(**parametros_conexion)
+    cur = conn.cursor()
+    cur.execute(query)
+    data = cur.fetchall()
+    cur.close()
+    conn.close()
+    return pd.DataFrame(data, columns=['Nombre Plataforma', 'Número de Playlist'])
+
+# Parámetros de conexión a la base de datos
+parametros_conexion = {
+    "dbname": "final",
+    "user": "postgres",
+    "password": "123456789",
+    "host": "localhost"
+}
+
+# Consulta SQL para el primer gráfico
+consulta_1 = """
+SELECT p.nombre AS nombre_plataforma, ip.playlist AS numero_de_playlists
+FROM info_plataformas ip
+INNER JOIN plataformas p ON ip.cod_plataforma = p.codigo_plataforma
+WHERE ip.cod_cancion = 87
+"""
+
+# Ejecutar la consulta y obtener DataFrame
+df2_3 = playlist87(consulta_1, parametros_conexion)
+
+# Crear gráficos con Plotly Express
+fig5 = px.bar(df2_3, x='Nombre Plataforma', y='Número de Playlist', title='Playlist por plataforma')
+
+# Número de charts para la canción 87
+def charts87(query, parametros_conexion):
+    conn = psycopg2.connect(**parametros_conexion)
+    cur = conn.cursor()
+    cur.execute(query)
+    data = cur.fetchall()
+    cur.close()
+    conn.close()
+    return pd.DataFrame(data, columns=['Nombre Plataforma', 'Número de Charts'])
+
+# Parámetros de conexión a la base de datos
+parametros_conexion = {
+    "dbname": "final",
+    "user": "postgres",
+    "password": "123456789",
+    "host": "localhost"
+}
+
+# Consulta SQL para el primer gráfico
+consulta_1 = """
+SELECT p.nombre AS nombre_plataforma, ip.charts AS numero_de_charts
+FROM info_plataformas ip
+INNER JOIN plataformas p ON ip.cod_plataforma = p.codigo_plataforma
+WHERE ip.cod_cancion = 87
+"""
+
+# Ejecutar la consulta y obtener DataFrame
+df2_4 = charts87(consulta_1, parametros_conexion)
+
+# Crear gráficos con Plotly Express
+fig6 = px.bar(df2_4, x='Nombre Plataforma', y='Número de Charts', title='Playlist por plataforma')
+
+#Número de playlist para la canción 180
+def playlist180(query, parametros_conexion):
+    conn = psycopg2.connect(**parametros_conexion)
+    cur = conn.cursor()
+    cur.execute(query)
+    data = cur.fetchall()
+    cur.close()
+    conn.close()
+    return pd.DataFrame(data, columns=['Nombre Plataforma', 'Número de Playlist'])
+
+# Parámetros de conexión a la base de datos
+parametros_conexion = {
+    "dbname": "final",
+    "user": "postgres",
+    "password": "123456789",
+    "host": "localhost"
+}
+
+# Consulta SQL para el primer gráfico
+consulta_1 = """
+SELECT p.nombre AS nombre_plataforma, ip.playlist AS numero_de_playlists
+FROM info_plataformas ip
+INNER JOIN plataformas p ON ip.cod_plataforma = p.codigo_plataforma
+WHERE ip.cod_cancion = 180
+"""
+
+# Ejecutar la consulta y obtener DataFrame
+df2_5 = playlist180(consulta_1, parametros_conexion)
+
+# Crear gráficos con Plotly Express
+fig7 = px.bar(df2_5, x='Nombre Plataforma', y='Número de Playlist', title='Playlist por plataforma')
+
+#Número de charts para la canción 180
+def charts180(query, parametros_conexion):
+    conn = psycopg2.connect(**parametros_conexion)
+    cur = conn.cursor()
+    cur.execute(query)
+    data = cur.fetchall()
+    cur.close()
+    conn.close()
+    return pd.DataFrame(data, columns=['Nombre Plataforma', 'Número de Charts'])
+
+# Parámetros de conexión a la base de datos
+parametros_conexion = {
+    "dbname": "final",
+    "user": "postgres",
+    "password": "123456789",
+    "host": "localhost"
+}
+
+# Consulta SQL para el primer gráfico
+consulta_1 = """
+SELECT p.nombre AS nombre_plataforma, ip.charts AS numero_de_charts
+FROM info_plataformas ip
+INNER JOIN plataformas p ON ip.cod_plataforma = p.codigo_plataforma
+WHERE ip.cod_cancion = 180
+"""
+
+# Ejecutar la consulta y obtener DataFrame
+df2_6 = charts180(consulta_1, parametros_conexion)
+
+# Crear gráficos con Plotly Express
+fig8 = px.bar(df2_6, x='Nombre Plataforma', y='Número de Charts', title='Playlist por plataforma')
+
+#Artistas que solo tienen 1 canción
+def artista1(query, parametros_conexion):
+    conn = psycopg2.connect(**parametros_conexion)
+    cur = conn.cursor()
+    cur.execute(query)
+    data = cur.fetchall()
+    cur.close()
+    conn.close()
+    return pd.DataFrame(data, columns=['Nombre Artista', 'Total Streams'])
+
+# Parámetros de conexión a la base de datos
+parametros_conexion = {
+    "dbname": "final",
+    "user": "postgres",
+    "password": "123456789",
+    "host": "localhost"
+}
+
+# Consulta SQL para el primer gráfico
+consulta_1 = """
+SELECT A.nombre AS nombre_artista, SUM(IP.stream) AS total_streams
+FROM Artista A
+INNER JOIN relacion_cancion_artista RCA ON A.codigo_artista = RCA.cod_artista
+INNER JOIN (
+    SELECT cod_artista, COUNT(cod_cancion) AS num_canciones
+    FROM relacion_cancion_artista
+    GROUP BY cod_artista
+    HAVING COUNT(cod_cancion) = 1
+) AS artistas_unicancion ON A.codigo_artista = artistas_unicancion.cod_artista
+INNER JOIN info_plataformas IP ON RCA.cod_cancion = IP.cod_cancion
+GROUP BY A.nombre
+ORDER BY total_streams DESC
+LIMIT 5;
+"""
+
+# Ejecutar la consulta y obtener DataFrame
+df3 = artista1(consulta_1, parametros_conexion)
+
+# Crear gráficos con Plotly Express
+fig9 = px.bar(df3, x='Nombre Artista', y='Total Streams', title='Artistas que solo tienen 1 canción')
+
+#Indicador de energía de energía de la canción de los artistas que solo aprecen 1 vez
+def artista_energia(query, parametros_conexion):
+    conn = psycopg2.connect(**parametros_conexion)
+    cur = conn.cursor()
+    cur.execute(query)
+    data = cur.fetchall()
+    cur.close()
+    conn.close()
+    return pd.DataFrame(data, columns=['Nombre Artista', 'Indicador energia','Total Streams'])
+
+# Parámetros de conexión a la base de datos
+parametros_conexion = {
+    "dbname": "final",
+    "user": "postgres",
+    "password": "123456789",
+    "host": "localhost"
+}
+
+# Consulta SQL para el primer gráfico
+consulta_1 = """
+SELECT A.nombre AS nombre_artista, I.energia AS indicador_energia, SUM(IP.stream) AS total_streams
+FROM Artista A
+INNER JOIN relacion_cancion_artista RCA ON A.codigo_artista = RCA.cod_artista
+INNER JOIN (
+    SELECT cod_artista, COUNT(cod_cancion) AS num_canciones
+    FROM relacion_cancion_artista
+    GROUP BY cod_artista
+    HAVING COUNT(cod_cancion) = 1
+) AS artistas_unicancion ON A.codigo_artista = artistas_unicancion.cod_artista
+INNER JOIN indicadores I ON RCA.cod_cancion = I.cod_cancion
+INNER JOIN info_plataformas IP ON RCA.cod_cancion = IP.cod_cancion
+GROUP BY A.nombre, I.energia
+ORDER BY total_streams DESC
+LIMIT 5;
+"""
+
+# Ejecutar la consulta y obtener DataFrame
+df3_1 = artista_energia(consulta_1, parametros_conexion)
+
+# Crear gráficos con Plotly Express
+fig10 = px.bar(df3_1, x='Nombre Artista', y='Indicador energia', title='Indicador de energía del top 5')
+
+# Indicador de acústica de los artistas que aparecen solo 1 vez
+def artista_acustica(query, parametros_conexion):
+    conn = psycopg2.connect(**parametros_conexion)
+    cur = conn.cursor()
+    cur.execute(query)
+    data = cur.fetchall()
+    cur.close()
+    conn.close()
+    return pd.DataFrame(data, columns=['Nombre Artista', 'Indicador acústica','Total Streams'])
+
+# Parámetros de conexión a la base de datos
+parametros_conexion = {
+    "dbname": "final",
+    "user": "postgres",
+    "password": "123456789",
+    "host": "localhost"
+}
+
+# Consulta SQL para el primer gráfico
+consulta_1 = """
+SELECT A.nombre AS nombre_artista, I.acustica AS indicador_acustica, SUM(IP.stream) AS total_streams
+FROM Artista A
+INNER JOIN relacion_cancion_artista RCA ON A.codigo_artista = RCA.cod_artista
+INNER JOIN (
+    SELECT cod_artista, COUNT(cod_cancion) AS num_canciones
+    FROM relacion_cancion_artista
+    GROUP BY cod_artista
+    HAVING COUNT(cod_cancion) = 1
+) AS artistas_unicancion ON A.codigo_artista = artistas_unicancion.cod_artista
+INNER JOIN indicadores I ON RCA.cod_cancion = I.cod_cancion
+INNER JOIN info_plataformas IP ON RCA.cod_cancion = IP.cod_cancion
+GROUP BY A.nombre, I.acustica
+ORDER BY total_streams DESC
+LIMIT 5
+"""
+
+# Ejecutar la consulta y obtener DataFrame
+df3_2 = artista_acustica(consulta_1, parametros_conexion)
+
+# Crear gráficos con Plotly Express
+fig11 = px.bar(df3_2, x='Nombre Artista', y='Indicador acústica', title='indicador de acustica del top 5')
+
+#Indicador de bailabilidad del top 3 canciones más escuchadas
+def top_bailabilidad(query, parametros_conexion):
+    conn = psycopg2.connect(**parametros_conexion)
+    cur = conn.cursor()
+    cur.execute(query)
+    data = cur.fetchall()
+    cur.close()
+    conn.close()
+    return pd.DataFrame(data, columns=['codigo cancion','Nombre cancion','bailabilidad'])
+
+# Parámetros de conexión a la base de datos
+parametros_conexion = {
+    "dbname": "final",
+    "user": "postgres",
+    "password": "123456789",
+    "host": "localhost"
+}
+
+# Consulta SQL para el primer gráfico
+consulta_1 = """
+SELECT c.codigo_cancion, c.nombre_cancion, ind.bailabilidad
+FROM cancion c
+JOIN info_plataformas ip ON c.codigo_cancion = ip.cod_cancion
+JOIN indicadores ind ON c.codigo_cancion = ind.cod_cancion
+ORDER BY ip.stream DESC
+LIMIT 3;
+"""
+
+# Ejecutar la consulta y obtener DataFrame
+df4_1 = top_bailabilidad(consulta_1, parametros_conexion)
+
+# Crear gráficos con Plotly Express
+fig12 = px.bar(df4_1, x='Nombre cancion', y='bailabilidad', title='Información de bailabilidad')
+
+# Indicador de valencia del top 3 canciones
+def top_valencia(query, parametros_conexion):
+    conn = psycopg2.connect(**parametros_conexion)
+    cur = conn.cursor()
+    cur.execute(query)
+    data = cur.fetchall()
+    cur.close()
+    conn.close()
+    return pd.DataFrame(data, columns=['codigo cancion','Nombre cancion','Valencia'])
+
+# Parámetros de conexión a la base de datos
+parametros_conexion = {
+    "dbname": "final",
+    "user": "postgres",
+    "password": "123456789",
+    "host": "localhost"
+}
+
+# Consulta SQL para el primer gráfico
+consulta_1 = """
+SELECT c.codigo_cancion, c.nombre_cancion, ind.Valencia
+FROM cancion c
+JOIN info_plataformas ip ON c.codigo_cancion = ip.cod_cancion
+JOIN indicadores ind ON c.codigo_cancion = ind.cod_cancion
+ORDER BY ip.stream DESC
+LIMIT 3;
+"""
+
+# Ejecutar la consulta y obtener DataFrame
+df4_2 = top_valencia(consulta_1, parametros_conexion)
+
+# Crear gráficos con Plotly Express
+fig13 = px.bar(df4_2, x='Nombre cancion', y='Valencia', title='Información de Valencia')
+
+#Indicador de energia del top 3 canciones
+def top_energia(query, parametros_conexion):
+    conn = psycopg2.connect(**parametros_conexion)
+    cur = conn.cursor()
+    cur.execute(query)
+    data = cur.fetchall()
+    cur.close()
+    conn.close()
+    return pd.DataFrame(data, columns=['codigo cancion','Nombre cancion','energia'])
+
+# Parámetros de conexión a la base de datos
+parametros_conexion = {
+    "dbname": "final",
+    "user": "postgres",
+    "password": "123456789",
+    "host": "localhost"
+}
+
+# Consulta SQL para el primer gráfico
+consulta_1 = """
+SELECT c.codigo_cancion, c.nombre_cancion, ind.energia
+FROM cancion c
+JOIN info_plataformas ip ON c.codigo_cancion = ip.cod_cancion
+JOIN indicadores ind ON c.codigo_cancion = ind.cod_cancion
+ORDER BY ip.stream DESC
+LIMIT 3;
+"""
+
+# Ejecutar la consulta y obtener DataFrame
+df4_3 = top_energia(consulta_1, parametros_conexion)
+
+# Crear gráficos con Plotly Express
+fig14 = px.bar(df4_3, x='Nombre cancion', y='energia', title='Información de energia')
+
+#Indicador de acústica del top 3 canciones
+def top_acustica(query, parametros_conexion):
+    conn = psycopg2.connect(**parametros_conexion)
+    cur = conn.cursor()
+    cur.execute(query)
+    data = cur.fetchall()
+    cur.close()
+    conn.close()
+    return pd.DataFrame(data, columns=['codigo cancion','Nombre cancion','acustica'])
+
+# Parámetros de conexión a la base de datos
+parametros_conexion = {
+    "dbname": "final",
+    "user": "postgres",
+    "password": "123456789",
+    "host": "localhost"
+}
+
+# Consulta SQL para el primer gráfico
+consulta_1 = """
+SELECT c.codigo_cancion, c.nombre_cancion, ind.acustica
+FROM cancion c
+JOIN info_plataformas ip ON c.codigo_cancion = ip.cod_cancion
+JOIN indicadores ind ON c.codigo_cancion = ind.cod_cancion
+ORDER BY ip.stream DESC
+LIMIT 3;
+"""
+
+# Ejecutar la consulta y obtener DataFrame
+df4_4 = top_acustica(consulta_1, parametros_conexion)
+
+# Crear gráficos con Plotly Express
+fig15 = px.bar(df4_4, x='Nombre cancion', y='acustica', title='Información de acústica')
+
+#Indicador de instrumentalidad del top 3 canciones
+def top_instrumentalidad(query, parametros_conexion):
+    conn = psycopg2.connect(**parametros_conexion)
+    cur = conn.cursor()
+    cur.execute(query)
+    data = cur.fetchall()
+    cur.close()
+    conn.close()
+    return pd.DataFrame(data, columns=['codigo cancion','Nombre cancion','instrumentalidad'])
+
+# Parámetros de conexión a la base de datos
+parametros_conexion = {
+    "dbname": "final",
+    "user": "postgres",
+    "password": "123456789",
+    "host": "localhost"
+}
+
+# Consulta SQL para el primer gráfico
+consulta_1 = """
+SELECT c.codigo_cancion, c.nombre_cancion, ind.instrumentalidad
+FROM cancion c
+JOIN info_plataformas ip ON c.codigo_cancion = ip.cod_cancion
+JOIN indicadores ind ON c.codigo_cancion = ind.cod_cancion
+ORDER BY ip.stream DESC
+LIMIT 3;
+"""
+
+# Ejecutar la consulta y obtener DataFrame
+df4_5 = top_instrumentalidad(consulta_1, parametros_conexion)
+
+# Crear gráficos con Plotly Express
+fig16 = px.bar(df4_5, x='Nombre cancion', y='instrumentalidad', title='Información de instrumentalidad')
+
+# Indicador de vivacidad del top 3 canciones
+def top_vivacidad(query, parametros_conexion):
+    conn = psycopg2.connect(**parametros_conexion)
+    cur = conn.cursor()
+    cur.execute(query)
+    data = cur.fetchall()
+    cur.close()
+    conn.close()
+    return pd.DataFrame(data, columns=['codigo cancion','Nombre cancion','vivacidad'])
+
+# Parámetros de conexión a la base de datos
+parametros_conexion = {
+    "dbname": "final",
+    "user": "postgres",
+    "password": "123456789",
+    "host": "localhost"
+}
+
+# Consulta SQL para el primer gráfico
+consulta_1 = """
+SELECT c.codigo_cancion, c.nombre_cancion, ind.vivacidad
+FROM cancion c
+JOIN info_plataformas ip ON c.codigo_cancion = ip.cod_cancion
+JOIN indicadores ind ON c.codigo_cancion = ind.cod_cancion
+ORDER BY ip.stream DESC
+LIMIT 3;
+"""
+
+# Ejecutar la consulta y obtener DataFrame
+df4_6 = top_vivacidad(consulta_1, parametros_conexion)
+
+# Crear gráficos con Plotly Express
+fig17 = px.bar(df4_6, x='Nombre cancion', y='vivacidad', title='Información de vivacidad')
+
+# Indicador de hablado del top 3 canciones
+def top_hablado(query, parametros_conexion):
+    conn = psycopg2.connect(**parametros_conexion)
+    cur = conn.cursor()
+    cur.execute(query)
+    data = cur.fetchall()
+    cur.close()
+    conn.close()
+    return pd.DataFrame(data, columns=['codigo cancion','Nombre cancion','Hablado'])
+
+# Parámetros de conexión a la base de datos
+parametros_conexion = {
+    "dbname": "final",
+    "user": "postgres",
+    "password": "123456789",
+    "host": "localhost"
+}
+
+# Consulta SQL para el primer gráfico
+consulta_1 = """
+SELECT c.codigo_cancion, c.nombre_cancion, ind.Hablado
+FROM cancion c
+JOIN info_plataformas ip ON c.codigo_cancion = ip.cod_cancion
+JOIN indicadores ind ON c.codigo_cancion = ind.cod_cancion
+ORDER BY ip.stream DESC
+LIMIT 3;
+"""
+
+# Ejecutar la consulta y obtener DataFrame
+df4_7 = top_hablado(consulta_1, parametros_conexion)
+
+# Crear gráficos con Plotly Express
+fig18 = px.bar(df4_7, x='Nombre cancion', y='Hablado', title='Información de Hablado')
 
 
 # Iniciar la aplicación Dash
@@ -102,11 +656,92 @@ app.layout = html.Div([
     
     # Problema 2
     html.Div([
-        html.H3("Movimiento de las plataformas"),
+        html.H2("Movimiento de las plataformas"),
         dcc.Graph(id='grafico-top-canciones',
         figure=fig2
         )
     ]),
+    
+    html.Div([
+        html.H3("Top 1"),
+        html.P("Nímero de playlist y charts por plataforma ")
+    ]),
+    
+    html.Div([
+         html.H4("Gráfica de playlist"),
+         dcc.Graph(id='grafico1', figure=fig3)]),
+    
+    html.Div([
+         html.H4("Gráfica de Charts"),
+         dcc.Graph(id='grafico2', figure=fig4)]),
+    
+    html.Div([
+        html.H3("Top 2"),
+        html.P("Nímero de playlist y charts por plataforma ")
+        ]),
+    
+    html.Div([
+         html.H4("Gráfica de playlist"),
+         dcc.Graph(id='grafico3', figure=fig5)]),
+    
+    html.Div([
+         html.H4("Gráfica de Charts"),
+         dcc.Graph(id='grafico4', figure=fig6)]),
+
+    html.Div([
+        html.H3("Top 3"),
+        html.P("Nímero de playlist y charts por plataforma ")
+        ]),
+    
+    html.Div([
+         html.H4("Gráfica de playlist"),
+         dcc.Graph(id='grafico5', figure=fig7)]),
+    
+    html.Div([
+         html.H4("Gráfica de Charts"),
+         dcc.Graph(id='grafico6', figure=fig8)]),
+    
+    #problema 3
+    html.Div([
+         html.H2("Gráfica de cantidad de streams"),
+         dcc.Graph(id='grafico1', figure=fig9)]),
+    
+    html.Div([
+         html.H2("Gráfica de cantidad de energía"),
+         dcc.Graph(id='grafico7', figure=fig10)]),
+    
+    html.Div([
+         html.H2("Gráfica de cantidad de acustica"),
+         dcc.Graph(id='grafico8', figure=fig11)]),
+    
+    #problematica 4
+    html.Div([
+         html.H2("bailabilidad"),
+         dcc.Graph(id='grafico9', figure=fig12)]),
+    
+    html.Div([
+         html.H2("Valencia"),
+         dcc.Graph(id='grafico10', figure=fig13)]),
+    
+    html.Div([
+         html.H2("energia"),
+         dcc.Graph(id='grafico11', figure=fig14)]),
+    
+    html.Div([
+         html.H2("acustica"),
+         dcc.Graph(id='grafico12', figure=fig15)]),
+    
+    html.Div([
+         html.H2("instrumentalidad"),
+         dcc.Graph(id='grafico13', figure=fig16)]),
+    
+    html.Div([
+         html.H2("vivacidad"),
+         dcc.Graph(id='grafico14', figure=fig17)]),
+    
+    html.Div([
+         html.H2("Hablado"),
+         dcc.Graph(id='grafico15', figure=fig18)]),
 
 ])
 
